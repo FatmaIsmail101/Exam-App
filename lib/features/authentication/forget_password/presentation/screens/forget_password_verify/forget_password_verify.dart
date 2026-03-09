@@ -12,14 +12,41 @@ class ForgetPasswordVerify extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Column(
-      spacing: 32.h,
+      // spacing: 20.h,
       children: [
         ForgetPasswordBlock(
           title: AppStrings.forgetPassword,
           content: AppStrings.passwordScreenDescription,
         ),
+        SizedBox(height: 32.h),
         PinWidget(pageController: pageController),
-        SizedBox(height: 16.h),
+        Text.rich(
+          TextSpan(
+            children: [
+              TextSpan(
+                text: AppStrings.verifyText,
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  color: Color(0xff0F0F0F),
+                ),
+              ),
+              TextSpan(
+                text: AppStrings.resend,
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  color: Color(0xff02369C),
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
+                  decorationColor: const Color(
+                    0xff02369C,
+                  ), // تأكيد لون الخط نفسه
+                  decorationStyle: TextDecorationStyle.solid,
+                  height: 6,
+                ),
+                // هنا تقدر تضيف الـ recognizer عشان لما يضغط يعيد الإرسال
+                // recognizer: TapGestureRecognizer()..onTap = () { /* Action */ },
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }

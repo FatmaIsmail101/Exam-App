@@ -1,23 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../../../core/values/app_strings.dart';
-
 class ForgetPasswordTextField extends StatefulWidget {
-  const ForgetPasswordTextField({super.key});
-
+  ForgetPasswordTextField({
+    super.key,
+    required this.hintText,
+    required this.labelText,
+    required this.validator,
+    required this.controller,
+    this.textInputType,
+  });
+  final String hintText;
+  final String labelText;
+  final String? Function(String?)? validator;
+  TextEditingController controller;
+  final TextInputType? textInputType;
   @override
   State<ForgetPasswordTextField> createState() =>
       _ForgetPasswordTextFieldState();
 }
 
 class _ForgetPasswordTextFieldState extends State<ForgetPasswordTextField> {
-  final TextEditingController emailController = TextEditingController();
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    emailController.dispose();
+    widget.controller.dispose();
   }
 
   @override
@@ -28,8 +36,8 @@ class _ForgetPasswordTextFieldState extends State<ForgetPasswordTextField> {
         fontSize: 16.sp,
         fontWeight: .w500,
       ),
-      controller: emailController,
-      keyboardType: TextInputType.emailAddress,
+      controller: widget.controller,
+      keyboardType: widget.textInputType,
       decoration: InputDecoration(
         focusColor: Color(0xffA6A6A6),
         border: OutlineInputBorder(
@@ -41,8 +49,8 @@ class _ForgetPasswordTextFieldState extends State<ForgetPasswordTextField> {
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Color(0xffA6A6A6)),
         ),
-        labelText: AppStrings.emailLabel,
-        hintText: AppStrings.emailHint,
+        labelText: widget.labelText,
+        hintText: widget.hintText,
         hintStyle: theme.textTheme.labelSmall,
         labelStyle: WidgetStateTextStyle.resolveWith((states) {
           if (states.contains(WidgetState.error)) {
@@ -58,17 +66,7 @@ class _ForgetPasswordTextFieldState extends State<ForgetPasswordTextField> {
         }),
         floatingLabelStyle: TextStyle(color: Color(0xffA6A6A6)),
       ),
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return AppStrings.emailMessage;
-        }
-        String pattern = AppStrings.emailRegex;
-        RegExp regex = RegExp(pattern);
-        if (!regex.hasMatch(value)) {
-          return AppStrings.emailMessage;
-        }
-        return null;
-      },
+      validator: widget.validator,
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:exam_app_elevate/features/authentication/forget_password/presentation/screens/forget_password_email/forget_password_email.dart';
+import 'package:exam_app_elevate/features/authentication/forget_password/presentation/screens/reset_password/reset_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -36,7 +37,7 @@ class ForgetPasswordScreen extends StatelessWidget {
             children: [
               ForgetPasswordEmail(pageController: pageController),
               ForgetPasswordVerify(pageController: pageController),
-              Placeholder(),
+              ResetPasswordScreen(),
             ],
           ),
         ),

@@ -1,5 +1,5 @@
-import 'package:exam_app_elevate/features/authentication/forget_password/presentation/screens/forget_password_email/widgets/forget_password_text_field.dart';
 import 'package:exam_app_elevate/features/authentication/forget_password/presentation/screens/widgets/forget_password_block.dart';
+import 'package:exam_app_elevate/features/authentication/forget_password/presentation/screens/widgets/forget_password_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,7 +14,7 @@ class ForgetPasswordEmail extends StatefulWidget {
 
 class _ForgetPasswordEmailState extends State<ForgetPasswordEmail> {
   final formKey = GlobalKey<FormState>();
-
+  final controller = TextEditingController();
   bool? isFormValid; // دي الحالة اللي هنربط بيها لون الزرار
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,23 @@ class _ForgetPasswordEmailState extends State<ForgetPasswordEmail> {
             title: AppStrings.forgetPassword,
             content: AppStrings.passwordScreenDescription,
           ),
-          ForgetPasswordTextField(),
+          ForgetPasswordTextField(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return AppStrings.emailMessage;
+              }
+              String pattern = AppStrings.emailRegex;
+              RegExp regex = RegExp(pattern);
+              if (!regex.hasMatch(value)) {
+                return AppStrings.emailMessage;
+              }
+              return null;
+            },
+            textInputType: TextInputType.emailAddress,
+            controller: controller,
+            hintText: AppStrings.emailHint,
+            labelText: AppStrings.emailLabel,
+          ),
           SizedBox(height: 16.h),
           ElevatedButton(
             onPressed: () {
