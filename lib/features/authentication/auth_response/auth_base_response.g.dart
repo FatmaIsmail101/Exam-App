@@ -9,8 +9,8 @@ part of 'auth_base_response.dart';
 AuthBaseResponse _$AuthBaseResponseFromJson(Map<String, dynamic> json) =>
     AuthBaseResponse(
       message: json['message'] as String?,
-      info: json['info'] as String?,
+      token: json['token'] as String?,
     );
 
 Map<String, dynamic> _$AuthBaseResponseToJson(AuthBaseResponse instance) =>
-    <String, dynamic>{'message': instance.message, 'info': instance.info};
+    <String, dynamic>{'message': instance.message, 'token': instance.token};
