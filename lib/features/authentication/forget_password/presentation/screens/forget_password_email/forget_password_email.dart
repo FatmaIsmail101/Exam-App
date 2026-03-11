@@ -112,8 +112,9 @@ class _ForgetPasswordEmailState extends State<ForgetPasswordEmail> {
             ElevatedButton(
               onPressed: () {
                 context.read<ForgetPasswordViewModel>().doIntent(
-                  event: SendEmailEvent(),
-                  request: ForgetPasswordRequest(email: widget.controller.text),
+                  event: SendEmailEvent(
+                    ForgetPasswordRequest(email: widget.controller.text),
+                  ),
                 );
               },
               style: ElevatedButton.styleFrom(

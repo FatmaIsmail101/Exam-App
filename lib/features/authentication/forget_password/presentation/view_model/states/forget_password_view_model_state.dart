@@ -13,17 +13,25 @@ class ForgetPasswordState {
         data: null,
         errorMessage: null,
       );
+  BaseState<AuthBaseResponse> resetPasswordState = BaseState<AuthBaseResponse>(
+    isLoading: true,
+    data: null,
+    errorMessage: null,
+  );
   ForgetPasswordState({
     required this.forgetePasswordState,
     required this.verifyEmailState,
+    required this.resetPasswordState,
   });
   ForgetPasswordState copyWith({
     BaseState<ForgetPasswordResponse>? authBaseResponse,
     BaseState<VerifyEmailResponse>? verifyEmailResponse,
+    BaseState<AuthBaseResponse>? resetPasswordResponse,
   }) {
     return ForgetPasswordState(
       forgetePasswordState: authBaseResponse ?? this.forgetePasswordState,
       verifyEmailState: verifyEmailResponse ?? this.verifyEmailState,
+      resetPasswordState: resetPasswordResponse ?? this.resetPasswordState,
     );
   }
 
@@ -35,6 +43,11 @@ class ForgetPasswordState {
         errorMessage: null,
       ),
       verifyEmailState: BaseState<VerifyEmailResponse>(
+        isLoading: true,
+        data: null,
+        errorMessage: null,
+      ),
+      resetPasswordState: BaseState<AuthBaseResponse>(
         isLoading: true,
         data: null,
         errorMessage: null,

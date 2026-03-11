@@ -50,8 +50,7 @@ class PinWidget extends StatelessWidget {
                 errorText: hasError ? "Invalid code, please try again" : null,
                 onCompleted: (pin) {
                   context.read<ForgetPasswordViewModel>().doIntent(
-                    event: VerifyEmailEvent(),
-                    verifyEmailRequest: VerifyEmailRequest(code: pin),
+                    event: VerifyEmailEvent(VerifyEmailRequest(code: pin)),
                   );
                 },
                 obscureText: true,

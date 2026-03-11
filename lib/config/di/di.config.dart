@@ -19,20 +19,30 @@ import '../../features/authentication/forget_password/data/data_source/forget_pa
     as _i667;
 import '../../features/authentication/forget_password/data/data_source/forget_password_data_source/forget_password_data_source_impl.dart'
     as _i76;
+import '../../features/authentication/forget_password/data/data_source/reset_password/reset_password_data_source_contract.dart'
+    as _i227;
+import '../../features/authentication/forget_password/data/data_source/reset_password/reset_password_data_source_impl.dart'
+    as _i660;
 import '../../features/authentication/forget_password/data/data_source/verify_email_data_source/verify_email_data_source_contract.dart'
     as _i808;
 import '../../features/authentication/forget_password/data/data_source/verify_email_data_source/verify_email_data_source_impl.dart'
     as _i649;
 import '../../features/authentication/forget_password/data/repository/forget_password_repo/forget_password_repo_impl.dart'
     as _i759;
+import '../../features/authentication/forget_password/data/repository/reset_password_repo/reset_password_repo_impl.dart'
+    as _i670;
 import '../../features/authentication/forget_password/data/repository/verify_email_repo/verify_email_repo_impl.dart'
     as _i753;
 import '../../features/authentication/forget_password/domain/repository/forget_password_repo/forget_password_repo_contract.dart'
     as _i387;
+import '../../features/authentication/forget_password/domain/repository/reset_password_repo/reset_password_repo_contract.dart'
+    as _i853;
 import '../../features/authentication/forget_password/domain/repository/verify_email_repo/verify_email_repo_contract.dart'
     as _i62;
 import '../../features/authentication/forget_password/domain/use_case/forget_password_use_case.dart'
     as _i819;
+import '../../features/authentication/forget_password/domain/use_case/reset_password_use_case.dart'
+    as _i973;
 import '../../features/authentication/forget_password/domain/use_case/verify_email_use_case.dart'
     as _i402;
 import '../../features/authentication/forget_password/presentation/view_model/forget_password_view_model_cubit.dart'
@@ -61,8 +71,16 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i667.ForgetPasswordDataSourceContract>(),
       ),
     );
+    gh.factory<_i227.ResetPasswordDataSourceContract>(
+      () => _i660.ResetPasswordDataSourceImpl(gh<_i627.ForgetPasswordClient>()),
+    );
     gh.factory<_i808.VerifyEmailDataSourceContract>(
       () => _i649.VerifyEmailDataSourceImpl(gh<_i627.ForgetPasswordClient>()),
+    );
+    gh.factory<_i853.ResetPasswordRepoContract>(
+      () => _i670.ResetPasswordRepoImpl(
+        gh<_i227.ResetPasswordDataSourceContract>(),
+      ),
     );
     gh.factory<_i62.VerifyEmailRepoContract>(
       () =>
@@ -71,6 +89,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i819.ForgetPasswordUseCase>(
       () => _i819.ForgetPasswordUseCase(gh<_i387.ForgetPasswordRepoContract>()),
     );
+    gh.factory<_i973.ResetPasswordUseCase>(
+      () => _i973.ResetPasswordUseCase(gh<_i853.ResetPasswordRepoContract>()),
+    );
     gh.factory<_i402.VerifyEmailUseCase>(
       () => _i402.VerifyEmailUseCase(gh<_i62.VerifyEmailRepoContract>()),
     );
@@ -78,6 +99,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i200.ForgetPasswordViewModel(
         gh<_i819.ForgetPasswordUseCase>(),
         gh<_i402.VerifyEmailUseCase>(),
+        gh<_i973.ResetPasswordUseCase>(),
       ),
     );
     return this;

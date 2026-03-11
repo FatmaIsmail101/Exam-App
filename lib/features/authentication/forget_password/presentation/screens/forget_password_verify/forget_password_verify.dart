@@ -14,12 +14,12 @@ import '../widgets/forget_password_block.dart';
 
 @immutable
 class ForgetPasswordVerify extends StatelessWidget {
-   ForgetPasswordVerify({
+  ForgetPasswordVerify({
     super.key,
     required this.pageController,
     required this.controller,
   });
- PinInputController pinInputController=PinInputController();
+  PinInputController pinInputController = PinInputController();
   final PageController pageController;
   final TextEditingController controller;
 
@@ -62,7 +62,10 @@ class ForgetPasswordVerify extends StatelessWidget {
             content: AppStrings.passwordScreenDescription,
           ),
           SizedBox(height: 32.h),
-          PinWidget(pageController: pageController,pinController: pinInputController,),
+          PinWidget(
+            pageController: pageController,
+            pinController: pinInputController,
+          ),
           SizedBox(height: 32.h),
           Text.rich(
             TextSpan(
@@ -88,8 +91,9 @@ class ForgetPasswordVerify extends StatelessWidget {
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
                       context.read<ForgetPasswordViewModel>().doIntent(
-                        event: SendEmailEvent(),
-                        request: ForgetPasswordRequest(email: controller.text),
+                        event: SendEmailEvent(
+                          ForgetPasswordRequest(email: controller.text),
+                        ),
                       );
                     },
                 ),
