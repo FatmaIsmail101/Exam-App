@@ -1,6 +1,6 @@
+// state.dart
 import 'package:equatable/equatable.dart';
 
-import '../../data/models/login_model.dart';
 import '../../domain/entity/login_entity.dart';
 
 abstract class LoginState extends Equatable {
@@ -10,28 +10,27 @@ abstract class LoginState extends Equatable {
   List<Object?> get props => [];
 }
 
-// initial state
 class LoginInitial extends LoginState {}
 
-// loading state
 class LoginLoading extends LoginState {}
 
-// success state
 class LoginSuccess extends LoginState {
   final LoginEntity login;
-
   const LoginSuccess(this.login);
 
   @override
   List<Object?> get props => [login];
 }
 
-// error state
 class LoginError extends LoginState {
   final String message;
+  final int code;
 
-  const LoginError(this.message);
+  const LoginError(this.message, this.code);
+
+  bool get isUnauthorized => code == 401;
+  bool get isServerError => code >= 500;
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [message, code];
 }

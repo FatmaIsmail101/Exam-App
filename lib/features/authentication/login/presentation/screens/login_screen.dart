@@ -24,12 +24,23 @@ class LoginScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is LoginSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Welcome ${state.login.user.username}')),
+              SnackBar(
+                  content: Text('Welcome ${state.login.user.username}',style:TextThemeApp.medium20Black.copyWith(
+                      fontSize: 12.sp,color: Colors.white) ,),
+                  backgroundColor: const Color(0xff4CAF50)
+
+              ),
             );
-            // هنا ممكن تعمل navigate للصفحة الرئيسية
+
           } else if (state is LoginError) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text("incorrect email or password")));
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message,style:TextThemeApp.medium20Black.copyWith(
+                    fontSize: 12.sp,color: Colors.white) ,),
+                backgroundColor: const Color(0xffCC1010)
+
+              ),
+            );
           }
         },
         builder: (context, state) {
@@ -113,7 +124,6 @@ class LoginScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 12.h),
 
-                    // Remember me + Forget password
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -161,6 +171,8 @@ class LoginScreen extends StatelessWidget {
                               email: _emailController.text.trim(),
                               password:
                               _passwordController.text.trim(),
+                              rememberMe: _rememberMe,
+
                             );
                           }
                         },
@@ -187,7 +199,6 @@ class LoginScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 16.h),
 
-                    // Sign up row
                     Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
