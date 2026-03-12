@@ -17,6 +17,7 @@ class ForgetPasswordEmail extends StatefulWidget {
     required this.pageController,
     required this.controller,
   });
+
   final TextEditingController controller;
   final PageController pageController;
 

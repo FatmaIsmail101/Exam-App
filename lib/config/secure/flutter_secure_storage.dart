@@ -4,6 +4,7 @@ import '../../core/values/app_keys.dart';
 
 class CashingFlutterSecureStorage {
   static late FlutterSecureStorage storage;
+
   static Future<void> init() async {
     storage = FlutterSecureStorage();
   }

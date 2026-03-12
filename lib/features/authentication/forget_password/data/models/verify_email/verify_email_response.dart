@@ -8,6 +8,7 @@ class VerifyEmailResponse {
   String? status;
 
   VerifyEmailResponse({this.status});
+
   factory VerifyEmailResponse.fromJson(Map<String, dynamic> json) =>
       _$VerifyEmailResponseFromJson(json);
 

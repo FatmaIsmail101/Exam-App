@@ -8,14 +8,16 @@ import 'package:exam_app_elevate/features/authentication/forget_password/data/mo
 import 'package:injectable/injectable.dart';
 import 'package:talker/talker.dart';
 
-import '../../../../../../config/base_classes/base_response.dart';
+import '../../../../../../config/base_response/base_response.dart';
 import '../../../api/forget_password_client.dart';
 import '../../models/forget_password/forget_password_response.dart';
 
 @Injectable(as: ForgetPasswordDataSourceContract)
 class ForgetPasswordDataSourceImpl implements ForgetPasswordDataSourceContract {
   ForgetPasswordClient client;
+
   ForgetPasswordDataSourceImpl({required this.client});
+
   final talker = Talker();
 
   @override

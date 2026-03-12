@@ -11,6 +11,7 @@ import 'forget_password_verify/forget_password_verify.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
   ForgetPasswordScreen({super.key});
+
   final formKey = GlobalKey<FormState>();
   final pageController = PageController();
   final emailController = TextEditingController();

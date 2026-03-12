@@ -4,14 +4,17 @@ import 'package:exam_app_elevate/features/authentication/forget_password/data/mo
 import 'package:injectable/injectable.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
-import '../../../../../../config/base_classes/base_response.dart';
+import '../../../../../../config/base_response/base_response.dart';
 import '../../../domain/repository/forget_password_repo/forget_password_repo_contract.dart';
 
 @Injectable(as: ForgetPasswordRepoContract)
 class ForgetPasswordRepoImpl implements ForgetPasswordRepoContract {
   ForgetPasswordDataSourceContract dataSource;
+
   ForgetPasswordRepoImpl(this.dataSource);
+
   final talker = Talker();
+
   @override
   Future<BaseResponse<ForgetPasswordResponse>> forgetPassword(
     ForgetPasswordRequest request,
@@ -23,9 +26,8 @@ class ForgetPasswordRepoImpl implements ForgetPasswordRepoContract {
         return SuccessBaseResponse<ForgetPasswordResponse>(data: response.data);
 
       case ErrorBaseResponse<ForgetPasswordResponse>():
-        talker.warning('The pizza is over 😥');
         talker.error(response.message);
-        talker.debug('Thinking about order new one 🤔');
+
         return ErrorBaseResponse<ForgetPasswordResponse>(
           message: response.message,
           code: response.code,

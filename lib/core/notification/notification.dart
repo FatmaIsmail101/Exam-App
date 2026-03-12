@@ -12,8 +12,10 @@ class NotificationBar {
   }) {
     final snackBar = SnackBar(
       elevation: 0,
-      behavior: SnackBarBehavior.floating, // ✅ تخليها تطفو فوق بدون تزق المحتوى
-      backgroundColor: Colors.transparent, // ✅ يخلي الخلفية شفافة
+      behavior: SnackBarBehavior.floating,
+      // ✅ تخليها تطفو فوق بدون تزق المحتوى
+      backgroundColor: Colors.transparent,
+      // ✅ يخلي الخلفية شفافة
       content: AwesomeSnackbarContent(
         title: title ?? _getTitle(type),
         message: message,

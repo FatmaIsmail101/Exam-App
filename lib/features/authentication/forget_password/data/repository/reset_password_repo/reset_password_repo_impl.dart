@@ -4,7 +4,7 @@ import 'package:exam_app_elevate/features/authentication/forget_password/data/mo
 import 'package:exam_app_elevate/features/authentication/forget_password/domain/repository/reset_password_repo/reset_password_repo_contract.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../../../config/base_classes/base_response.dart';
+import '../../../../../../config/base_response/base_response.dart';
 
 @Injectable(as: ResetPasswordRepoContract)
 class ResetPasswordRepoImpl implements ResetPasswordRepoContract {

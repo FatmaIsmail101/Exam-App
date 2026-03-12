@@ -5,8 +5,8 @@ import 'package:exam_app_elevate/features/authentication/forget_password/present
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../../config/base_classes/base_response.dart';
-import '../../../../../config/base_classes/base_state.dart';
+import '../../../../../config/base_response/base_response.dart';
+import '../../../../../config/base_state/base_state.dart';
 import '../../data/models/forget_password/forget_password_response.dart';
 import '../../data/models/reset_password/reset_password_request.dart';
 import '../../data/models/verify_email/verify_email_request.dart';
@@ -21,11 +21,13 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
   final ForgetPasswordUseCase _sendEmailuUseCase;
   final VerifyEmailUseCase _verifyEmailUseCase;
   final ResetPasswordUseCase _resetPasswordUseCase;
+
   ForgetPasswordViewModel(
     this._sendEmailuUseCase,
     this._verifyEmailUseCase,
     this._resetPasswordUseCase,
   ) : super(ForgetPasswordState.initial());
+
   Future<void> doIntent({required ForgetPasswordEvent event}) async {
     switch (event) {
       case SendEmailEvent():

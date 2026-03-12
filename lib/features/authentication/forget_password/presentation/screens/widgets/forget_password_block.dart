@@ -7,8 +7,10 @@ class ForgetPasswordBlock extends StatelessWidget {
     required this.title,
     required this.content,
   });
+
   final String title;
   final String content;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);

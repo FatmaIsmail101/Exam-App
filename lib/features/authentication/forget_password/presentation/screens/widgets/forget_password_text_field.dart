@@ -11,11 +11,13 @@ class ForgetPasswordTextField extends StatefulWidget {
     required this.controller,
     this.textInputType,
   });
+
   final String hintText;
   final String labelText;
   final String? Function(String?)? validator;
   final TextEditingController controller;
   final TextInputType? textInputType;
+
   @override
   State<ForgetPasswordTextField> createState() =>
       _ForgetPasswordTextFieldState();

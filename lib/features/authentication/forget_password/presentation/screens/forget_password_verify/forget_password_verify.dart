@@ -19,6 +19,7 @@ class ForgetPasswordVerify extends StatelessWidget {
     required this.pageController,
     required this.controller,
   });
+
   PinInputController pinInputController = PinInputController();
   final PageController pageController;
   final TextEditingController controller;

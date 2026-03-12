@@ -10,7 +10,9 @@ class AuthBaseResponse {
   String? token;
 
   AuthBaseResponse({this.message, this.token});
+
   factory AuthBaseResponse.fromJson(Map<String, dynamic> json) =>
       _$AuthBaseResponseFromJson(json);
+
   Map<String, dynamic> toJson() => _$AuthBaseResponseToJson(this);
 }

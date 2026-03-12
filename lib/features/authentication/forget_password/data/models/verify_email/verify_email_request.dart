@@ -8,6 +8,7 @@ class VerifyEmailRequest {
   String code;
 
   VerifyEmailRequest({required this.code});
+
   factory VerifyEmailRequest.fromJson(Map<String, dynamic> json) =>
       _$VerifyEmailRequestFromJson(json);
 

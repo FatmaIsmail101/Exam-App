@@ -1,5 +1,4 @@
-import 'package:exam_app_elevate/config/base_classes/base_response.dart';
-
+import '../../../../../../config/base_response/base_response.dart';
 import '../../models/verify_email/verify_email_request.dart';
 import '../../models/verify_email/verify_email_response.dart';
 

@@ -19,12 +19,15 @@ part 'forget_password_client.g.dart';
 abstract class ForgetPasswordClient {
   @factoryMethod
   factory ForgetPasswordClient(Dio dio) = _ForgetPasswordClient;
+
   @POST(AppEndPoints.forgetPasswordEndpoint)
   Future<ForgetPasswordResponse> forgetPassword(
     @Body() ForgetPasswordRequest request,
   );
+
   @POST(AppEndPoints.verifyResetPasswordEndpoint)
   Future<VerifyEmailResponse> verifyEmail(@Body() VerifyEmailRequest request);
+
   @PUT(AppEndPoints.resetPasswordEndpoint)
   Future<AuthBaseResponse> resetPassword(@Body() ResetPasswordRequest request);
 }
