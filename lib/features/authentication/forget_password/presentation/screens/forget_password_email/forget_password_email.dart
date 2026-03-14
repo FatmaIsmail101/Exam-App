@@ -97,6 +97,7 @@ class _ForgetPasswordEmailState extends State<ForgetPasswordEmail> {
               content: AppStrings.passwordScreenDescription,
             ),
             ForgetPasswordTextField(
+              isPassword: false,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return AppStrings.emailMessage;

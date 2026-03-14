@@ -1,6 +1,7 @@
 part of '../forget_password_view_model_cubit.dart';
 
 class ForgetPasswordState {
+  final String? email;
   BaseState<ForgetPasswordResponse> forgetePasswordState =
       BaseState<ForgetPasswordResponse>(
         isLoading: true,
@@ -20,6 +21,7 @@ class ForgetPasswordState {
   );
 
   ForgetPasswordState({
+    this.email,
     required this.forgetePasswordState,
     required this.verifyEmailState,
     required this.resetPasswordState,
@@ -29,16 +31,19 @@ class ForgetPasswordState {
     BaseState<ForgetPasswordResponse>? authBaseResponse,
     BaseState<VerifyEmailResponse>? verifyEmailResponse,
     BaseState<AuthBaseResponse>? resetPasswordResponse,
+    String? email,
   }) {
     return ForgetPasswordState(
       forgetePasswordState: authBaseResponse ?? forgetePasswordState,
       verifyEmailState: verifyEmailResponse ?? verifyEmailState,
       resetPasswordState: resetPasswordResponse ?? resetPasswordState,
+      email: email ?? this.email,
     );
   }
 
   static ForgetPasswordState initial() {
     return ForgetPasswordState(
+      email: null,
       forgetePasswordState: BaseState<ForgetPasswordResponse>(
         isLoading: true,
         data: null,

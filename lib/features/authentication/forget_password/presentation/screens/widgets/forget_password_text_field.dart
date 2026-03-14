@@ -3,13 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 @immutable
 class ForgetPasswordTextField extends StatefulWidget {
-  const ForgetPasswordTextField({
+  ForgetPasswordTextField({
     super.key,
     required this.hintText,
     required this.labelText,
     required this.validator,
     required this.controller,
     this.textInputType,
+    this.isPassword = true,
   });
 
   final String hintText;
@@ -17,7 +18,7 @@ class ForgetPasswordTextField extends StatefulWidget {
   final String? Function(String?)? validator;
   final TextEditingController controller;
   final TextInputType? textInputType;
-
+  final bool isPassword;
   @override
   State<ForgetPasswordTextField> createState() =>
       _ForgetPasswordTextFieldState();
@@ -39,6 +40,10 @@ class _ForgetPasswordTextFieldState extends State<ForgetPasswordTextField> {
         fontSize: 16.sp,
         fontWeight: .w500,
       ),
+      mouseCursor: MouseCursor.defer,
+      obscuringCharacter: '*',
+      obscureText: widget.isPassword ? true : false,
+      cursorColor: Color(0xffA6A6A6),
       controller: widget.controller,
       keyboardType: widget.textInputType,
       decoration: InputDecoration(
@@ -53,6 +58,7 @@ class _ForgetPasswordTextFieldState extends State<ForgetPasswordTextField> {
           borderSide: BorderSide(color: Color(0xffA6A6A6)),
         ),
         labelText: widget.labelText,
+
         hintText: widget.hintText,
         hintStyle: theme.textTheme.labelSmall,
         labelStyle: WidgetStateTextStyle.resolveWith((states) {

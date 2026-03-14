@@ -4,6 +4,7 @@ import 'package:exam_app_elevate/features/authentication/forget_password/domain/
 import 'package:exam_app_elevate/features/authentication/forget_password/presentation/view_model/states/forget_password_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 import '../../../../../config/base_response/base_response.dart';
 import '../../../../../config/base_state/base_state.dart';
@@ -21,7 +22,7 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
   final ForgetPasswordUseCase _sendEmailuUseCase;
   final VerifyEmailUseCase _verifyEmailUseCase;
   final ResetPasswordUseCase _resetPasswordUseCase;
-
+  final talker = Talker();
   ForgetPasswordViewModel(
     this._sendEmailuUseCase,
     this._verifyEmailUseCase,
@@ -37,7 +38,7 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
         await _verifyEmail(event.request);
         break;
       case ResetPasswordEvent():
-        await _resetPassword(event.request);
+        await _resetPassword(event);
         break;
     }
   }
@@ -57,6 +58,7 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
       case SuccessBaseResponse<ForgetPasswordResponse>():
         emit(
           state.copyWith(
+            email: request.email,
             authBaseResponse: BaseState<ForgetPasswordResponse>(
               isLoading: false,
               data: response.data,
@@ -64,6 +66,7 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
             ),
           ),
         );
+        talker.info(request.email);
         break;
       case ErrorBaseResponse<ForgetPasswordResponse>():
         emit(
@@ -116,7 +119,13 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
     }
   }
 
-  Future<void> _resetPassword(ResetPasswordRequest request) async {
+  Future<void> _resetPassword(ResetPasswordEvent event) async {
+    final savedEmail = state.email;
+
+    if (savedEmail == null) {
+      // اختياري: ممكن تطلعي error لو الايميل مش موجود لسبب ما
+      return;
+    }
     emit(
       state.copyWith(
         resetPasswordResponse: BaseState<AuthBaseResponse>(
@@ -126,7 +135,11 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
         ),
       ),
     );
-    final response = await _resetPasswordUseCase.resetPassword(request);
+
+    // 3. نبعت الـ updatedRequest مش الـ event.request الأصلي
+    final response = await _resetPasswordUseCase.resetPassword(
+      ResetPasswordRequest(email: savedEmail, password: event.request.password),
+    );
     switch (response) {
       case SuccessBaseResponse<AuthBaseResponse>():
         emit(
